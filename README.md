@@ -5,6 +5,12 @@
 This is a simple full stack [React](https://reactjs.org/) application with a [Node.js](https://nodejs.org/en/) and [Express](https://expressjs.com/) backend which allows an user to retrieve audience sizes for different topics and visualise them on a simple dashboard. Client side code is written in React and the backend API is written using Express.
 This application is created from the [boilerplate](https://github.com/crsandeep/simple-react-full-stack) here.
 
+Specifically the requirements are:
+
+- A nodejs backend to expose the data on publicly accessible endpoints
+- A react dashboard to visualize audience sizes & overlaps as described in the task brief
+- No preference on how/where data is stored
+- No need to worry about adding new topics & data refresh
 
 ### Development mode
 

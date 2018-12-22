@@ -1,8 +1,24 @@
 const express = require('express');
-const os = require('os');
+const bodyParser = require('body-parser');
+const { Client } = require('pg');
+
+const client = new Client();
+await client.connect();
 
 const app = express();
 
-app.use(express.static('dist'));
-app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+
+app.get('/api/product', (req, res, next) => {
+  const { productTopic } = req.body;
+
+  // res.send({ username: os.userInfo().username });
+  return next();
+});
+
 app.listen(8080, () => console.log('Listening on port 8080!'));
