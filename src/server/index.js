@@ -1,9 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { Client } = require('pg');
-
-const client = new Client();
-await client.connect();
+const { getProductTopic } = require('./db');
 
 const app = express();
 
@@ -14,11 +11,6 @@ app.use(
   })
 );
 
-app.get('/api/product', (req, res, next) => {
-  const { productTopic } = req.body;
-
-  // res.send({ username: os.userInfo().username });
-  return next();
-});
+app.get('/api/product', getProductTopic);
 
 app.listen(8080, () => console.log('Listening on port 8080!'));
