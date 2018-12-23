@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import Dashboard from './components/Dashboard';
+
+const Spinner = props => {
+  const { isLoading } = props;
+  return <div> {isLoading && <i className="fas fa-circle-notch fa-3x fa-spin text-dark"/>} </div>
+};
 
 export default class App extends Component {
   state = {};
@@ -6,7 +12,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <h1>{'Hello World'}</h1>
+        <Dashboard />
       </div>
     );
   }

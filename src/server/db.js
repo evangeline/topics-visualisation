@@ -6,11 +6,13 @@ const pool = new Pool({
 });
 
 const getProductTopic = async (req, res, next) => {
-  const { productTopic } = req.body;
-  console.log(productTopic);
-  const { rows } = await pool.query(`SELECT * FROM topic_sizes WHERE topic1 ='${productTopic}'`);
-  res.status(200).send({ rows });
-  return next();
+  try {
+    const { productTopic } = req.body;
+    const { rows } = await pool.query(`SELECT * FROM topic_sizes WHERE topic1 ='${productTopic}'`);
+    res.status(200).send({ rows });
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = {
