@@ -1,27 +1,21 @@
 const express = require('express');
+var cors = require('cors')
 const bodyParser = require('body-parser');
 const { getProductTopic } = require('./db');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
-
-const isProductTopic = (req, res, next) => {
-  if (typeof req.body.productTopic === 'string') {
-    next();
-  } else {
-    res.status(400).json({ error: 'Product Topic not specified' }.send());
-  }
-};
+// const PORT = process.env.PORT || 8080;
+const PORT = 8080;
 
 app.use(
   bodyParser.json(),
   bodyParser.urlencoded({
     extended: true,
   }),
-  isProductTopic
+  cors(),
 );
 
-app.get('/api/product', getProductTopic);
+app.get('/api/product/:topic', getProductTopic);
 
 app.use((error, req, res, next) => {
   console.error(error.stack);
@@ -29,6 +23,7 @@ app.use((error, req, res, next) => {
 });
 
 app.use((req, res) => {
+  console.log(req);
   res.status(404).json({ error: 'Not found'}).send();
 });
 

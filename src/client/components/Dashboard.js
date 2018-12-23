@@ -2,10 +2,20 @@ import React from 'react';
 import Table from './ResultsTable';
 import TopicInputBox from './TopicSelector';
 
+const Spinner = () => {
+  return (
+    <div className="row text-center">
+      <div className="col my-auto">
+        <i className="fas fa-circle-notch fa-3x fa-spin text-dark" />
+      </div>
+    </div>
+  );
+};
+
 const DashboardHeader = () => {
   return (
     <div className="row text-center">
-      <div className="col">
+      <div className="col m-5">
         <h1>Pencil Dashboard Demo</h1>
       </div>
     </div>
@@ -25,11 +35,13 @@ const TopicInput = ({handleTopicInputChange, handleTopicInputButtonClick, topic}
   );
 };
 
-const Results = () => {
+const Results = ({ results }) => {
+
   return (
     <div className="row text-center">
       <div className="col-lg-4">
-        <Table />
+        <Table
+          results={results}/>
       </div>
       <div className="col-lg-8">
         <div
@@ -44,17 +56,30 @@ const Results = () => {
   );
 };
 
-const Dashboard = ({ handleTopicInputChange, handleTopicInputButtonClick, topic }) => {
+const Dashboard = ({ handleTopicInputChange, handleTopicInputButtonClick, isLoading, results, topic }) => {
+  let dashboardContent;
+  if (isLoading) {
+    dashboardContent = <Spinner />;
+  } else {
+    dashboardContent =
+      <div>
+        <TopicInput
+          handleTopicInputChange={handleTopicInputChange}
+          handleTopicInputButtonClick={handleTopicInputButtonClick}
+          topic={topic}/>
+        <Results
+          results={results}/>
+      </div>
+  }
   return (
     <div
-      className="container-fluid justify-content-center bg-light"
-      style={{ minHeight: '100%' }}>
+      className="container-fluid justify-content-center bg-light h-100">
       <DashboardHeader />
-      <TopicInput
-        handleTopicInputChange={handleTopicInputChange}
-        handleTopicInputButtonClick={handleTopicInputButtonClick}
-        topic={topic}/>
-      <Results />
+      <div className="row text-center">
+        <div className="col my-auto">
+          {dashboardContent}
+        </div>
+      </div>
     </div>
   );
 };
