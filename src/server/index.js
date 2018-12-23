@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 const { getProductTopic } = require('./db');
 
 const app = express();
@@ -14,19 +13,7 @@ const isProductTopic = (req, res, next) => {
   }
 };
 
-// const allowCrossDomain = (req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-//   res.header('Access-Control-Allow-Headers', 'Content-Type');
-//   next();
-// };
-
 app.use(
-  // allowCrossDomain,
-  // cors({
-  //   credentials: true,
-  //   methods: ['GET'],
-  // }),
   bodyParser.json(),
   bodyParser.urlencoded({
     extended: true,
