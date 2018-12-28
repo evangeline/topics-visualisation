@@ -5,9 +5,9 @@ const pool = new Pool({
   user, host, database, password, port: 5432, ssl: true
 });
 
-const normaliseRows = ({topic2, topic2_size, combined_size}) => {
-  const audienceSize = parseInt(topic2_size, 10);
-  const combinedSize = parseInt(combined_size, 10);
+const rowToDataset = ({topic2, topic2_size, combined_size}) => {
+  const audienceSize = parseInt(topic2_size, 10) / 1000;
+  const combinedSize = parseInt(combined_size, 10) / 1000;
   const productInterest = Math.floor(combinedSize / audienceSize * 100);
   return ({
     audienceTopic: topic2,
@@ -20,8 +20,8 @@ const normaliseRows = ({topic2, topic2_size, combined_size}) => {
 const getProductTopic = async (req, res, next) => {
   try {
     const { rows } = await pool.query(`SELECT * FROM topic_sizes WHERE topic1 ='${req.params.topic}'`);
-    const normalisedRows = rows.map(normaliseRows);
-    res.status(200).send({ normalisedRows });
+    const datasets = rows.map(rowToDataset);
+    res.status(200).send({ datasets });
   } catch (error) {
     next(error);
   }

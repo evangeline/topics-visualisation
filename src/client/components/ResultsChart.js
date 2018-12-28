@@ -1,8 +1,8 @@
 import React from 'react';
 import { Bubble } from 'react-chartjs-2';
 
-const Graph = ({ dataset }) => {
-  const data = { datasets: dataset };
+const Graph = ({ datasets }) => {
+  const data = { datasets };
   const options = {
     legend: {
       display: false
@@ -11,19 +11,21 @@ const Graph = ({ dataset }) => {
       yAxes: [{
         scaleLabel: {
           display: true,
-          labelString: 'Combined Size'
+          labelString: 'Combined Product and Audience Size (\'000s)'
         },
         ticks: {
-          beginAtZero: true
+          beginAtZero: true,
+          suggestedMax: 10000
         }
       }],
       xAxes: [{
         scaleLabel: {
           display: true,
-          labelString: 'Audience Size'
+          labelString: 'Audience Size (\'000s)'
         },
         ticks: {
-          beginAtZero: true
+          beginAtZero: true,
+          suggestedMax: 10000
         }
       }]
     },

@@ -25,7 +25,7 @@ const TableRow = ({ topic2, topic2_size, combined_size }) => {
   );
 };
 
-const Table = ({ results }) => {
+const Table = ({ datasets }) => {
 
   const columns = [{
     Header: 'Audience Topic',
@@ -52,7 +52,7 @@ const Table = ({ results }) => {
 
   return (
     <ReactTable
-      data={results}
+      data={datasets}
       columns={columns}
       className="-striped -highlight"/>
   );

@@ -49,23 +49,22 @@ const TopicInput = ({ handleTopicInputChange, handleTopicInputButtonClick, topic
   );
 };
 
-const Results = ({ results }) => {
-  const dataset = results.map(graphDataset);
+const Results = ({ datasets }) => {
   return (
     <div className="row">
       <div className="col-lg-4">
         <Table
-          results={results}/>
+          datasets={datasets}/>
       </div>
       <div className="col-lg-8">
         <Graph
-          dataset={dataset}/>
+          datasets={datasets.map(graphDataset)}/>
       </div>
     </div>
   );
 };
 
-const Dashboard = ({ handleTopicInputChange, handleTopicInputButtonClick, isLoading, results, topic }) => {
+const Dashboard = ({ handleTopicInputChange, handleTopicInputButtonClick, isLoading, datasets, topic }) => {
   let dashboardContent;
   if (isLoading) {
     dashboardContent = <Spinner />;
@@ -77,7 +76,7 @@ const Dashboard = ({ handleTopicInputChange, handleTopicInputButtonClick, isLoad
           handleTopicInputButtonClick={handleTopicInputButtonClick}
           topic={topic}/>
         <Results
-          results={results}/>
+          datasets={datasets}/>
       </div>;
   }
   return (

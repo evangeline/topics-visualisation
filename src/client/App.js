@@ -7,7 +7,7 @@ export default class App extends Component {
     this.state = {
       productTopic: '',
       isLoading: false,
-      results: []
+      datasets: []
     };
 
     this.handleTopicInputChange = this.handleTopicInputChange.bind(this);
@@ -26,9 +26,9 @@ export default class App extends Component {
         }
         throw new Error(`Request failed with error: ${res.body}`);
       })
-      .then(({ normalisedRows }) => {
+      .then(({ datasets }) => {
         this.setState({
-          results: normalisedRows,
+          datasets,
           isLoading: false,
         });
       })
@@ -50,7 +50,7 @@ export default class App extends Component {
           handleTopicInputChange={this.handleTopicInputChange}
           handleTopicInputButtonClick={this.handleTopicInputButtonClick}
           isLoading={this.state.isLoading}
-          results={this.state.results}
+          datasets={this.state.datasets}
           topic={this.state.productTopic}
         />
       </div>
