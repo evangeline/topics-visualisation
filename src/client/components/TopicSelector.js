@@ -2,10 +2,11 @@ import React from 'react';
 
 const TopicInputButton = ({onTopicInputButtonClick, disabled}) => {
   return (
-    <button type="button"
-            className="btn btn-outline-dark"
-            onClick={onTopicInputButtonClick}
-            disabled={disabled}>
+    <button
+      type="button"
+      className="btn btn-outline-dark"
+      onClick={onTopicInputButtonClick}
+      disabled={disabled}>
       Generate Results
     </button>
   );

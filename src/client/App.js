@@ -15,7 +15,6 @@ export default class App extends Component {
   }
 
   handleTopicInputButtonClick() {
-    console.log(this.state);
     this.setState({ isLoading: true });
     // polyfill
     fetch(`/api/product/${this.state.productTopic}`, {
@@ -27,12 +26,11 @@ export default class App extends Component {
         }
         throw new Error(`Request failed with error: ${res.body}`);
       })
-      .then(({ rows }) => {
+      .then(({ normalisedRows }) => {
         this.setState({
-          results: rows,
+          results: normalisedRows,
           isLoading: false,
         });
-        console.log(this.state);
       })
       .catch((err) => {
         console.log(err);

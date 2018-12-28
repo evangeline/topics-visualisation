@@ -1,6 +1,20 @@
 import React from 'react';
 import Table from './ResultsTable';
+import Graph from './ResultsChart';
 import TopicInputBox from './TopicSelector';
+
+const graphDataset = ({ audienceTopic, audienceSize, combinedSize, productInterest }) => (
+  {
+    label: audienceTopic,
+    data: [
+      {
+        x: audienceSize,
+        y: combinedSize,
+        r: Math.sqrt(productInterest / Math.PI),
+      }
+    ],
+    backgroundColor: '#ff6384',
+  });
 
 const Spinner = () => {
   return (
@@ -22,7 +36,7 @@ const DashboardHeader = () => {
   );
 };
 
-const TopicInput = ({handleTopicInputChange, handleTopicInputButtonClick, topic}) => {
+const TopicInput = ({ handleTopicInputChange, handleTopicInputButtonClick, topic }) => {
   return (
     <div className="row text-center">
       <div className="col">
@@ -36,21 +50,16 @@ const TopicInput = ({handleTopicInputChange, handleTopicInputButtonClick, topic}
 };
 
 const Results = ({ results }) => {
-
+  const dataset = results.map(graphDataset);
   return (
-    <div className="row text-center">
+    <div className="row">
       <div className="col-lg-4">
         <Table
           results={results}/>
       </div>
       <div className="col-lg-8">
-        <div
-          className="card border-0 shadow"
-          style={{ minHeight: '100%' }}>
-          <div className="card-body">
-            <h1>Chart here</h1>
-          </div>
-        </div>
+        <Graph
+          dataset={dataset}/>
       </div>
     </div>
   );
@@ -69,13 +78,13 @@ const Dashboard = ({ handleTopicInputChange, handleTopicInputButtonClick, isLoad
           topic={topic}/>
         <Results
           results={results}/>
-      </div>
+      </div>;
   }
   return (
     <div
       className="container-fluid justify-content-center bg-light h-100">
       <DashboardHeader />
-      <div className="row text-center">
+      <div className="row">
         <div className="col my-auto">
           {dashboardContent}
         </div>

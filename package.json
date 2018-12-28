@@ -15,13 +15,15 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.3",
+    "chart.js": "^2.7.3",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "express": "^4.16.3",
-    "lodash": "^4.17.11",
     "pg": "^7.7.1",
     "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react-chartjs-2": "^2.7.4",
+    "react-dom": "^16.5.2",
+    "react-table": "^6.8.6"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
