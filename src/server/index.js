@@ -1,11 +1,14 @@
 const express = require('express');
+const cors = require('cors');
 const { getProductTopic } = require('./db');
 
 const app = express();
 // const PORT = process.env.PORT || 8080;
 const PORT = 8080;
 
-app.get('/product/:topic', getProductTopic);
+app.use(cors());
+
+app.get('/api/product/:topic', getProductTopic);
 
 app.use((error, req, res, next) => {
   console.error(error.stack);

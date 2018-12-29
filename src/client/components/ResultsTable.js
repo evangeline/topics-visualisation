@@ -54,7 +54,14 @@ const Table = ({ datasets }) => {
     <ReactTable
       data={datasets}
       columns={columns}
-      className="-striped -highlight"/>
+      className="-striped -highlight"
+      defaultSorted={[
+        {
+          id: 'productInterest',
+          desc: true
+        }
+      ]}
+      defaultPageSize={10}/>
   );
 };
 

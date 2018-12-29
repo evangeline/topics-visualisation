@@ -35,6 +35,7 @@ const Graph = ({ datasets }) => {
       data={data}
       options={options}
     />
-)};
+  );
+};
 
 export default Graph;

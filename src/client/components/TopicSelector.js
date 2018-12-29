@@ -1,19 +1,26 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-const TopicInputButton = ({ topic, history }) => (
-  <button
-    type="button"
-    className="btn btn-outline-dark"
-    onClick={() => { history.push(`/product/${topic}`); }}
-    disabled={!topic}>
-    Generate Results
-  </button>
-);
+const TopicInputButton = ({ handleTopicInputButtonClick, topic, history }) => {
+  const buttonClicked = e => {
+    e.preventDefault();
+    history.push(`/product/${topic}`);
+    handleTopicInputButtonClick(topic);
+  };
+  return (
+    <button
+      type="button"
+      className="btn btn-outline-dark"
+      onClick={buttonClicked}
+      disabled={!topic}>
+      Generate Results
+    </button>
+  );
+};
 
 const TopicInputButtonWithRouter = withRouter(TopicInputButton);
 
-const TopicInputBox = ({handleTopicInputChange, topic}) => {
+const TopicInputBox = ({ handleTopicInputChange, handleTopicInputButtonClick, topic }) => {
   const inputChanged = e => {
     e.preventDefault();
     handleTopicInputChange(e.target.value);
@@ -30,6 +37,7 @@ const TopicInputBox = ({handleTopicInputChange, topic}) => {
         onChange={inputChanged}/>
       <div className="input-group-append">
         <TopicInputButtonWithRouter
+          handleTopicInputButtonClick={handleTopicInputButtonClick}
           topic={topic}/>
       </div>
     </div>
