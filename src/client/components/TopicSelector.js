@@ -1,16 +1,17 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
-const TopicInputButton = ({onTopicInputButtonClick, disabled}) => {
-  return (
-    <button
-      type="button"
-      className="btn btn-outline-dark"
-      onClick={onTopicInputButtonClick}
-      disabled={disabled}>
-      Generate Results
-    </button>
-  );
-};
+const TopicInputButton = ({ topic, history }) => (
+  <button
+    type="button"
+    className="btn btn-outline-dark"
+    onClick={() => { history.push(`/product/${topic}`); }}
+    disabled={!topic}>
+    Generate Results
+  </button>
+);
+
+const TopicInputButtonWithRouter = withRouter(TopicInputButton);
 
 const TopicInputBox = ({handleTopicInputChange, handleTopicInputButtonClick, topic}) => {
   const inputChanged = e => {
@@ -28,9 +29,8 @@ const TopicInputBox = ({handleTopicInputChange, handleTopicInputButtonClick, top
         value={topic}
         onChange={inputChanged}/>
       <div className="input-group-append">
-        <TopicInputButton
-          onTopicInputButtonClick={handleTopicInputButtonClick}
-          disabled={!topic}/>
+        <TopicInputButtonWithRouter
+          topic={topic}/>
       </div>
     </div>
   );

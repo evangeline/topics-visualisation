@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 import Table from './ResultsTable';
 import Graph from './ResultsChart';
 import TopicInputBox from './TopicSelector';
@@ -71,10 +72,6 @@ const Dashboard = ({ handleTopicInputChange, handleTopicInputButtonClick, isLoad
   } else {
     dashboardContent =
       <div>
-        <TopicInput
-          handleTopicInputChange={handleTopicInputChange}
-          handleTopicInputButtonClick={handleTopicInputButtonClick}
-          topic={topic}/>
         <Results
           datasets={datasets}/>
       </div>;
@@ -85,7 +82,13 @@ const Dashboard = ({ handleTopicInputChange, handleTopicInputButtonClick, isLoad
       <DashboardHeader />
       <div className="row">
         <div className="col my-auto">
-          {dashboardContent}
+          <TopicInput
+            handleTopicInputChange={handleTopicInputChange}
+            handleTopicInputButtonClick={handleTopicInputButtonClick}
+            topic={topic}/>
+          <Switch>
+            <Route path="/product/:topic" component={dashboardContent} />
+          </Switch>
         </div>
       </div>
     </div>

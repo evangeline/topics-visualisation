@@ -17,24 +17,24 @@ export default class App extends Component {
   handleTopicInputButtonClick() {
     this.setState({ isLoading: true });
     // polyfill
-    fetch(`/api/product/${this.state.productTopic}`, {
-      method: 'GET',
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        throw new Error(`Request failed with error: ${res.body}`);
-      })
-      .then(({ datasets }) => {
-        this.setState({
-          datasets,
-          isLoading: false,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // fetch(`/product/${this.state.productTopic}`, {
+    //   method: 'GET',
+    // })
+    //   .then(res => {
+    //     if (res.ok) {
+    //       return res.json();
+    //     }
+    //     throw new Error(`Request failed with error: ${res.body}`);
+    //   })
+    //   .then(({ datasets }) => {
+    //     this.setState({
+    //       datasets,
+    //       isLoading: false,
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }
 
   handleTopicInputChange(topic) {

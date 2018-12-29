@@ -19,7 +19,8 @@ const rowToDataset = ({topic2, topic2_size, combined_size}) => {
 
 const getProductTopic = async (req, res, next) => {
   try {
-    const { rows } = await pool.query(`SELECT * FROM topic_sizes WHERE topic1 ='${req.params.topic}'`);
+    const stringRes = req.url.split('/');
+    const { rows } = await pool.query(`SELECT * FROM topic_sizes WHERE UPPER(topic1) = UPPER('${stringRes[2]}')`);
     const datasets = rows.map(rowToDataset);
     res.status(200).send({ datasets });
   } catch (error) {
