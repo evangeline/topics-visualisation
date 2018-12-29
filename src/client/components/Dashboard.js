@@ -37,13 +37,12 @@ const DashboardHeader = () => {
   );
 };
 
-const TopicInput = ({ handleTopicInputChange, handleTopicInputButtonClick, topic }) => {
+const TopicInput = ({ handleTopicInputChange, topic }) => {
   return (
     <div className="row text-center">
       <div className="col">
         <TopicInputBox
           handleTopicInputChange={handleTopicInputChange}
-          handleTopicInputButtonClick={handleTopicInputButtonClick}
           topic={topic}/>
       </div>
     </div>
@@ -102,7 +101,7 @@ class Results extends Component {
   }
 }
 
-const Dashboard = ({ handleTopicInputChange, handleTopicInputButtonClick, datasets, topic }) => {
+const Dashboard = ({ handleTopicInputChange, datasets, topic }) => {
   return (
     <Router>
       <div
@@ -112,7 +111,6 @@ const Dashboard = ({ handleTopicInputChange, handleTopicInputButtonClick, datase
           <div className="col my-auto">
             <TopicInput
               handleTopicInputChange={handleTopicInputChange}
-              handleTopicInputButtonClick={handleTopicInputButtonClick}
               topic={topic}/>
             <Route path="/product/:topic" render={(routeProps) => <Results num="2" routeProps={routeProps} />} />
           </div>

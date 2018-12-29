@@ -13,7 +13,7 @@ const TopicInputButton = ({ topic, history }) => (
 
 const TopicInputButtonWithRouter = withRouter(TopicInputButton);
 
-const TopicInputBox = ({handleTopicInputChange, handleTopicInputButtonClick, topic}) => {
+const TopicInputBox = ({handleTopicInputChange, topic}) => {
   const inputChanged = e => {
     e.preventDefault();
     handleTopicInputChange(e.target.value);

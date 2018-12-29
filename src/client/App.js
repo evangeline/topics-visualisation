@@ -22,7 +22,6 @@ class App extends Component {
       <div className="h-100">
         <Dashboard
           handleTopicInputChange={this.handleTopicInputChange}
-          handleTopicInputButtonClick={this.handleTopicInputButtonClick}
           datasets={this.state.datasets}
           topic={this.state.productTopic}
         />
