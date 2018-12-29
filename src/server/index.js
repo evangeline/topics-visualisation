@@ -1,6 +1,4 @@
 const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
 const { getProductTopic } = require('./db');
 
 const app = express();
@@ -15,7 +13,6 @@ app.use((error, req, res, next) => {
 });
 
 app.use((req, res) => {
-  console.log(req);
   res.status(404).json({ error: 'Not found' }).send();
 });
 

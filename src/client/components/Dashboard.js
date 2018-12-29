@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Table from './ResultsTable';
 import Graph from './ResultsChart';
 import TopicInputBox from './TopicSelector';
@@ -50,48 +50,75 @@ const TopicInput = ({ handleTopicInputChange, handleTopicInputButtonClick, topic
   );
 };
 
-const Results = ({ datasets }) => {
-  return (
-    <div className="row">
-      <div className="col-lg-4">
-        <Table
-          datasets={datasets}/>
-      </div>
-      <div className="col-lg-8">
-        <Graph
-          datasets={datasets.map(graphDataset)}/>
-      </div>
-    </div>
-  );
-};
-
-const Dashboard = ({ handleTopicInputChange, handleTopicInputButtonClick, isLoading, datasets, topic }) => {
-  let dashboardContent;
-  if (isLoading) {
-    dashboardContent = <Spinner />;
-  } else {
-    dashboardContent =
-      <div>
-        <Results
-          datasets={datasets}/>
-      </div>;
+class Results extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      datasets: []
+    };
   }
+
+  componentDidMount() {
+    const { topic } = this.props.routeProps.match.params;
+    // polyfill
+    fetch(`${topic}`, {
+      method: 'GET',
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error(`Request failed with error: ${res.body}`);
+      })
+      .then(({ datasets }) => {
+        this.setState({
+          datasets
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  render() {
+    const { datasets } = this.state;
+    if (datasets.length > 0) {
+      return (
+        <div className="row">
+          <div className="col-lg-4">
+            <Table
+              datasets={datasets}/>
+          </div>
+          <div className="col-lg-8">
+            <Graph
+              datasets={datasets.map(graphDataset)}/>
+          </div>
+        </div>
+      );
+    }
+    return (
+      <Spinner />
+    );
+  }
+}
+
+const Dashboard = ({ handleTopicInputChange, handleTopicInputButtonClick, datasets, topic }) => {
   return (
-    <div
-      className="container-fluid justify-content-center bg-light h-100">
-      <DashboardHeader />
-      <div className="row">
-        <div className="col my-auto">
-          <TopicInput
-            handleTopicInputChange={handleTopicInputChange}
-            handleTopicInputButtonClick={handleTopicInputButtonClick}
-            topic={topic}/>
-          <Switch>
-            <Route path="/product/:topic" component={dashboardContent} />
-          </Switch>
+    <Router>
+      <div
+        className="container-fluid justify-content-center bg-light h-100">
+        <DashboardHeader />
+        <div className="row">
+          <div className="col my-auto">
+            <TopicInput
+              handleTopicInputChange={handleTopicInputChange}
+              handleTopicInputButtonClick={handleTopicInputButtonClick}
+              topic={topic}/>
+            <Route path="/product/:topic" render={(routeProps) => <Results num="2" routeProps={routeProps} />} />
+          </div>
         </div>
       </div>
-    </div>
+    </Router>
   );
 };
 
