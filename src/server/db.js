@@ -5,7 +5,7 @@ const pool = new Pool({
   user, host, database, password, port: 5432, ssl: true
 });
 
-const rowToDataset = ({topic2, topic2_size, combined_size}) => {
+const rowToDataset = ({ topic2, topic2_size, combined_size }) => {
   const audienceSize = parseInt(topic2_size, 10) / 1000;
   const combinedSize = parseInt(combined_size, 10) / 1000;
   const productInterest = Math.floor(combinedSize / audienceSize * 100);
@@ -27,6 +27,17 @@ const getProductTopic = async (req, res, next) => {
   }
 };
 
+const getProductTopics = async (req, res, next) => {
+  try {
+    const { rows } = await pool.query('SELECT DISTINCT topic1 FROM topic_sizes');
+    const topics = rows.map(({ topic1 }) => topic1);
+    res.status(200).send({ topics });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
-  getProductTopic
+  getProductTopic,
+  getProductTopics
 };

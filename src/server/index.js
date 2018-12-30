@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const { getProductTopic } = require('./db');
+const { getProductTopic, getProductTopics } = require('./db');
 
 const app = express();
 // const PORT = process.env.PORT || 8080;
@@ -10,6 +10,7 @@ const PORT = 8080;
 app.use(cors());
 
 app.get('/api/product/:topic', getProductTopic);
+app.get('/api/topics', getProductTopics);
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', '..', 'public', 'index.html'));
 });

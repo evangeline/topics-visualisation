@@ -13,7 +13,7 @@ const TopicInputButton = ({ handleTopicInputButtonClick, topic, history }) => {
       className="btn btn-outline-dark"
       onClick={buttonClicked}
       disabled={!topic}>
-      Generate Results
+      <i className="fas fa-pencil-alt"/>
     </button>
   );
 };
@@ -26,7 +26,7 @@ const TopicInputBox = ({ handleTopicInputChange, handleTopicInputButtonClick, to
     handleTopicInputChange(e.target.value);
   };
   return (
-    <div className="input-group mb-5">
+    <div className="input-group">
       <input
         type="text"
         className="form-control"
