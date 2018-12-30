@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 const TopicInputButton = ({ handleTopicInputButtonClick, topic, history }) => {
   const buttonClicked = e => {
     e.preventDefault();
-    history.push(`/product/${topic}`);
+    history.push(`/product/${topic.toLowerCase()}`);
     handleTopicInputButtonClick(topic);
   };
   return (

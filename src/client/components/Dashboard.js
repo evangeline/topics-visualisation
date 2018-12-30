@@ -1,5 +1,5 @@
-import React  from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Table from './ResultsTable';
 import Graph from './ResultsChart';
 import TopicInputBox from './TopicSelector';
@@ -9,9 +9,9 @@ const graphDataset = ({ audienceTopic, audienceSize, combinedSize, productIntere
     label: audienceTopic,
     data: [
       {
-        x: audienceSize,
-        y: combinedSize,
-        r: Math.sqrt(productInterest / Math.PI),
+        x: productInterest,
+        y: audienceSize,
+        r: Math.sqrt(combinedSize / Math.PI) / 5,
       }
     ],
     backgroundColor: '#ff6384',
@@ -35,7 +35,7 @@ const DashboardHeader = () => (
 
 const TopicInput = ({ handleTopicInputChange, handleTopicInputButtonClick, topic }) => (
   <div className="row text-center">
-    <div className="col">
+    <div className="col-md-6 mx-auto">
       <TopicInputBox
         handleTopicInputChange={handleTopicInputChange}
         handleTopicInputButtonClick={handleTopicInputButtonClick}
@@ -45,7 +45,6 @@ const TopicInput = ({ handleTopicInputChange, handleTopicInputButtonClick, topic
 );
 
 const Results = ({ datasets, isLoading }) => {
-  console.log(isLoading);
   if (!isLoading) {
     return (
       <div className="row">
@@ -65,25 +64,23 @@ const Results = ({ datasets, isLoading }) => {
   );
 };
 
-const Dashboard = ({ handleTopicInputChange, handleTopicInputButtonClick, datasets, topic, isLoading }) => {
-  return (
-    <Router>
-      <div className="container-fluid justify-content-center bg-light h-100">
-        <DashboardHeader />
-        <div className="row">
-          <div className="col">
-            <TopicInput
-              handleTopicInputChange={handleTopicInputChange}
-              handleTopicInputButtonClick={handleTopicInputButtonClick}
-              topic={topic}/>
-            <Results
-              datasets={datasets}
-              isLoading={isLoading}/>
-          </div>
+const Dashboard = ({ handleTopicInputChange, handleTopicInputButtonClick, datasets, topic, isLoading }) => (
+  <Router>
+    <div className="container-fluid justify-content-center bg-light h-100">
+      <DashboardHeader/>
+      <div className="row">
+        <div className="col">
+          <TopicInput
+            handleTopicInputChange={handleTopicInputChange}
+            handleTopicInputButtonClick={handleTopicInputButtonClick}
+            topic={topic}/>
+          <Results
+            datasets={datasets}
+            isLoading={isLoading}/>
         </div>
       </div>
-    </Router>
-  );
-};
+    </div>
+  </Router>
+);
 
 export default Dashboard;

@@ -11,21 +11,20 @@ const Graph = ({ datasets }) => {
       yAxes: [{
         scaleLabel: {
           display: true,
-          labelString: 'Combined Product and Audience Size (\'000s)'
+          labelString: 'Audience Size (\'000s)'
         },
         ticks: {
           beginAtZero: true,
-          suggestedMax: 10000
         }
       }],
       xAxes: [{
         scaleLabel: {
           display: true,
-          labelString: 'Audience Size (\'000s)'
+          labelString: 'Product Interest (%)'
         },
         ticks: {
           beginAtZero: true,
-          suggestedMax: 10000
+          suggestedMax: 100
         }
       }]
     },
