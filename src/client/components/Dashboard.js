@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React  from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Table from './ResultsTable';
 import Graph from './ResultsChart';
 import TopicInputBox from './TopicSelector';
@@ -28,7 +28,7 @@ const Spinner = () => (
 const DashboardHeader = () => (
   <div className="row text-center">
     <div className="col m-5">
-      <h1>Pencil Dashboard Demo</h1>
+      <h1 className="display-4">Pencil Dashboard Demo</h1>
     </div>
   </div>
 );
@@ -44,8 +44,9 @@ const TopicInput = ({ handleTopicInputChange, handleTopicInputButtonClick, topic
   </div>
 );
 
-const Results = ({ datasets }) => {
-  if (datasets.length > 0) {
+const Results = ({ datasets, isLoading }) => {
+  console.log(isLoading);
+  if (!isLoading) {
     return (
       <div className="row">
         <div className="col-lg-6">
@@ -64,25 +65,20 @@ const Results = ({ datasets }) => {
   );
 };
 
-const NotFound = () => (
-  <h1>Not Found</h1>
-);
-
-const Dashboard = ({ handleTopicInputChange, handleTopicInputButtonClick, datasets, topic }) => {
+const Dashboard = ({ handleTopicInputChange, handleTopicInputButtonClick, datasets, topic, isLoading }) => {
   return (
     <Router>
       <div className="container-fluid justify-content-center bg-light h-100">
         <DashboardHeader />
         <div className="row">
-          <div className="col my-auto">
+          <div className="col">
             <TopicInput
               handleTopicInputChange={handleTopicInputChange}
               handleTopicInputButtonClick={handleTopicInputButtonClick}
               topic={topic}/>
-            <Switch>
-              <Route path="/product/:topic" render={routeProps => <Results datasets={datasets} routeProps={routeProps} />} />
-              {/*<Route component={NotFound} />*/}
-            </Switch>
+            <Results
+              datasets={datasets}
+              isLoading={isLoading}/>
           </div>
         </div>
       </div>
