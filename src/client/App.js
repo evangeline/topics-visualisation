@@ -17,7 +17,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      productTopics: [],
       productTopic: '',
       datasets: [],
       isLoading: false,
@@ -27,32 +26,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getTopics();
     const path = window.location.pathname.split('/');
     if (path[1] === 'product' && typeof path[2] === 'string') {
       this.getDataset(path[2]);
     }
-  }
-
-  getTopics() {
-    // polyfill
-    fetch('http://localhost:8080/api/topics', {
-      method: 'GET',
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        throw new Error(`Request failed with error: ${res.body}`);
-      })
-      .then(({ topics }) => {
-        this.setState({
-          productTopics: topics,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }
 
   getDataset(topic) {
@@ -92,14 +69,12 @@ class App extends Component {
               handleTopicInputChange={this.handleTopicInputChange}
               handleTopicInputButtonClick={this.handleTopicInputButtonClick}
               datasets={this.state.datasets}
-              productTopics={this.state.productTopics}
               topic={this.state.productTopic}
               isLoading={this.state.isLoading}/>} />
             <Route path="/product/:topic" render={props => <Dashboard
               handleTopicInputChange={this.handleTopicInputChange}
               handleTopicInputButtonClick={this.handleTopicInputButtonClick}
               datasets={this.state.datasets}
-              productTopics={this.state.productTopics}
               topic={this.state.productTopic}
               isLoading={this.state.isLoading}/>} />
             <Route component={NotFound} />

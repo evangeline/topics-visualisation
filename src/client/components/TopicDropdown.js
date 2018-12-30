@@ -54,13 +54,40 @@ class TopicDropdown extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      productTopics: [],
       filteredTopics: []
     };
     this.handleTopicInputChange = this.handleTopicInputChange.bind(this);
   }
 
+  componentDidMount() {
+    this.getTopics();
+  };
+
+  getTopics() {
+    // polyfill
+    fetch('http://localhost:8080/api/topics', {
+      method: 'GET',
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error(`Request failed with error: ${res.body}`);
+      })
+      .then(({ topics }) => {
+        this.setState({
+          productTopics: topics,
+          filteredTopics: topics,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   handleTopicInputChange(input) {
-    const filteredTopics = this.props.productTopics.filter(topic => topic.indexOf(input) > -1);
+    const filteredTopics = this.state.productTopics.filter(topic => topic.indexOf(input) > -1);
     this.setState({
       filteredTopics
     });

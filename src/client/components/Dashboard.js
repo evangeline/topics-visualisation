@@ -28,20 +28,13 @@ const Spinner = () => (
   </div>
 );
 
-const DashboardNavbar = ({ handleTopicInputButtonClick, productTopics, topic }) => (
+const DashboardNavbar = ({ handleTopicInputButtonClick, topic }) => (
   <nav className="navbar d-flex sticky-top navbar-light bg-white shadow-sm">
     <Link className="navbar-brand" to="/">
       <img src="../../public/pencil.png" alt="logo" style={{ maxHeight: '30px' }}/>
     </Link>
-    {/*<form className="form-inline mx-auto d-inline w-75">*/}
-      {/*<TopicInputBox*/}
-        {/*handleTopicInputChange={handleTopicInputChange}*/}
-        {/*handleTopicInputButtonClick={handleTopicInputButtonClick}*/}
-        {/*topic={topic}/>*/}
-    {/*</form>*/}
     <TopicDropdown
       handleTopicInputButtonClick={handleTopicInputButtonClick}
-      productTopics={productTopics}
       topic={topic}/>
   </nav>
 );
@@ -70,12 +63,11 @@ const Results = ({ datasets, isLoading }) => {
   );
 };
 
-const Dashboard = ({ handleTopicInputButtonClick, datasets, productTopics, topic, isLoading }) => (
+const Dashboard = ({ handleTopicInputButtonClick, datasets, topic, isLoading }) => (
   <Router>
     <div className="container-fluid d-flex flex-column bg-light p-0 h-100">
       <DashboardNavbar
         handleTopicInputButtonClick={handleTopicInputButtonClick}
-        productTopics={productTopics}
         topic={topic}/>
       <div className="row px-3">
         <div className="col-xl-11 mx-auto mt-5">
