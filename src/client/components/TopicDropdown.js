@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const TopicDropdownButton = ({ handleTopicInputButtonClick, topic }) => {
+const TopicDropdownItem = ({ handleTopicInputButtonClick, topic }) => {
   const dropdownKey = `dropdown-${topic}`;
   const buttonClicked = e => {
     e.preventDefault();
@@ -36,7 +36,7 @@ const TopicInput = ({ handleTopicInputChange }) => {
 };
 
 const TopicDropdownMenu = ({ handleTopicInputChange, handleTopicInputButtonClick, filteredTopics }) => {
-  const TopicDropdownButtons = filteredTopics.map(topic => <TopicDropdownButton
+  const TopicDropdownItems = filteredTopics.map(topic => <TopicDropdownItem
     topic={topic}
     handleTopicInputButtonClick={handleTopicInputButtonClick}/>);
   return (
@@ -45,7 +45,7 @@ const TopicDropdownMenu = ({ handleTopicInputChange, handleTopicInputButtonClick
       aria-labelledby="dropdownMenu">
       <TopicInput
         handleTopicInputChange={handleTopicInputChange}/>
-      {TopicDropdownButtons}
+      {TopicDropdownItems}
     </div>
   );
 };
@@ -93,6 +93,7 @@ class TopicDropdown extends Component {
     });
   }
 
+  // TODO need to stop rerendering all the buttons!
   render() {
     return (
       <div className="dropdown mx-auto">
