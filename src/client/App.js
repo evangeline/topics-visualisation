@@ -21,7 +21,6 @@ class App extends Component {
       datasets: [],
       isLoading: false,
     };
-
     this.handleTopicInputButtonClick = this.handleTopicInputButtonClick.bind(this);
   }
 
@@ -57,7 +56,7 @@ class App extends Component {
 
   handleTopicInputButtonClick(topic) {
     this.setState({ productTopic: topic });
-    // this.getDataset(topic);
+    this.getDataset(topic);
   }
 
   render() {

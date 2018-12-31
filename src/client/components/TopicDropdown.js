@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 const TopicDropdownItem = ({ handleTopicInputButtonClick, topic }) => {
-  const dropdownKey = `dropdown-${topic}`;
   const buttonClicked = e => {
     e.preventDefault();
     handleTopicInputButtonClick(topic);
@@ -10,8 +9,7 @@ const TopicDropdownItem = ({ handleTopicInputButtonClick, topic }) => {
     <button
       type="button"
       className="dropdown-item"
-      onClick={buttonClicked}
-      key={dropdownKey}>
+      onClick={buttonClicked}>
       {topic}
     </button>
   );
@@ -37,6 +35,7 @@ const TopicInput = ({ handleTopicInputChange }) => {
 
 const TopicDropdownMenu = ({ handleTopicInputChange, handleTopicInputButtonClick, filteredTopics }) => {
   const TopicDropdownItems = filteredTopics.map(topic => <TopicDropdownItem
+    key={`dropdown-${topic.replace(/\s/g, '')}`}
     topic={topic}
     handleTopicInputButtonClick={handleTopicInputButtonClick}/>);
   return (
@@ -87,7 +86,7 @@ class TopicDropdown extends Component {
   }
 
   handleTopicInputChange(input) {
-    const filteredTopics = this.state.productTopics.filter(topic => topic.indexOf(input) > -1);
+    const filteredTopics = this.state.productTopics.filter(topic => topic.search(new RegExp(input, 'i')) > -1);
     this.setState({
       filteredTopics
     });
