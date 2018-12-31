@@ -27,7 +27,9 @@ class App extends Component {
   componentDidMount() {
     const path = window.location.pathname.split('/');
     if (path[1] === 'product' && typeof path[2] === 'string') {
-      this.getDataset(path[2]);
+      const topic = decodeURIComponent(path[2].charAt(0).toUpperCase() + path[2].slice(1));
+      this.setState({ productTopic: topic });
+      this.getDataset(topic);
     }
   }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import matchSorter from 'match-sorter';
 
 const TopicDropdownItem = ({ handleTopicInputButtonClick, topic, history }) => {
   const buttonClicked = e => {
@@ -42,6 +43,7 @@ const TopicDropdownMenu = ({ handleTopicInputChange, handleTopicInputButtonClick
     key={`dropdown-${topic.replace(/\s/g, '')}`}
     topic={topic}
     handleTopicInputButtonClick={handleTopicInputButtonClick}/>);
+  console.log(TopicDropdownItems);
   return (
     <div
       className="dropdown-menu pre-scrollable mx-auto"
@@ -90,13 +92,12 @@ class TopicDropdown extends Component {
   }
 
   handleTopicInputChange(input) {
-    const filteredTopics = this.state.productTopics.filter(topic => topic.search(new RegExp(input, 'i')) > -1);
+    const filteredTopics = matchSorter(this.state.productTopics, input);
     this.setState({
       filteredTopics
     });
   }
 
-  // TODO need to stop rerendering all the buttons!
   render() {
     return (
       <div className="dropdown mx-auto">
