@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
-const TopicDropdownItem = ({ handleTopicInputButtonClick, topic }) => {
+const TopicDropdownItem = ({ handleTopicInputButtonClick, topic, history }) => {
   const buttonClicked = e => {
     e.preventDefault();
+    history.push(`/product/${topic.toLowerCase()}`);
     handleTopicInputButtonClick(topic);
   };
   return (
@@ -14,6 +16,8 @@ const TopicDropdownItem = ({ handleTopicInputButtonClick, topic }) => {
     </button>
   );
 };
+
+const TopicDropdownItemWithRouter = withRouter(TopicDropdownItem);
 
 const TopicInput = ({ handleTopicInputChange }) => {
   const inputChanged = e => {
@@ -34,7 +38,7 @@ const TopicInput = ({ handleTopicInputChange }) => {
 };
 
 const TopicDropdownMenu = ({ handleTopicInputChange, handleTopicInputButtonClick, filteredTopics }) => {
-  const TopicDropdownItems = filteredTopics.map(topic => <TopicDropdownItem
+  const TopicDropdownItems = filteredTopics.map(topic => <TopicDropdownItemWithRouter
     key={`dropdown-${topic.replace(/\s/g, '')}`}
     topic={topic}
     handleTopicInputButtonClick={handleTopicInputButtonClick}/>);
@@ -103,7 +107,7 @@ class TopicDropdown extends Component {
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false">
-          {this.props.topic || 'Select Product Topic'}
+          {this.props.topic || 'Select a Product Topic'}
         </button>
         <TopicDropdownMenu
           handleTopicInputChange={this.handleTopicInputChange}

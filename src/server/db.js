@@ -29,7 +29,7 @@ const getProductTopic = async (req, res, next) => {
 
 const getProductTopics = async (req, res, next) => {
   try {
-    const { rows } = await pool.query('SELECT DISTINCT topic1 FROM topic_sizes');
+    const { rows } = await pool.query('SELECT DISTINCT topic1 FROM topic_sizes ORDER BY topic1 ASC');
     const topics = rows.map(({ topic1 }) => topic1);
     res.status(200).send({ topics });
   } catch (error) {

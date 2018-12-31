@@ -1,8 +1,21 @@
 import React from 'react';
 import { Bubble } from 'react-chartjs-2';
 
+const graphDataset = ({ audienceTopic, audienceSize, combinedSize, productInterest }) => (
+  {
+    label: audienceTopic,
+    data: [
+      {
+        x: productInterest,
+        y: audienceSize,
+        r: Math.sqrt(combinedSize / Math.PI) / 5,
+      }
+    ],
+    backgroundColor: '#ff6384',
+  });
+
 const Graph = ({ datasets }) => {
-  const data = { datasets };
+  const data = { datasets: datasets.map(graphDataset) };
   const options = {
     legend: {
       display: false
