@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link, withRouter } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 
 const NotFound = () => (
@@ -7,30 +7,28 @@ const NotFound = () => (
     <div className="row text-center">
       <div className="col my-auto">
         <h1 className="display-4">Oops!</h1>
-        <p className="lead">There's nothing here. You can head back to <Link to="/">our homepage</Link>.</p>
+        <p className="lead">There's nothing here. You can head back to <Link to="/">our
+          homepage</Link>.</p>
       </div>
     </div>
   </div>
 );
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       productTopic: '',
       datasets: [],
       isLoading: false,
     };
-    this.handleTopicInputButtonClick = this.handleTopicInputButtonClick.bind(this);
   }
 
   componentDidMount() {
-    const path = window.location.pathname.split('/');
-    if (path[1] === 'product' && typeof path[2] === 'string') {
-      const topic = decodeURIComponent(path[2].charAt(0).toUpperCase() + path[2].slice(1));
-      this.setState({ productTopic: topic });
-      this.getDataset(topic);
-    }
+    this.onRouteChanged(window.location);
+    this.props.history.listen((location) => {
+      this.onRouteChanged(location);
+    });
   }
 
   getDataset(topic) {
@@ -56,9 +54,16 @@ class App extends Component {
       });
   }
 
-  handleTopicInputButtonClick(topic) {
-    this.setState({ productTopic: topic });
-    this.getDataset(topic);
+  onRouteChanged(location) {
+    const path = location.pathname.split('/');
+    if (path[1] === 'product' && typeof path[2] === 'string') {
+      const topic = decodeURIComponent(path[2].charAt(0).toUpperCase() + path[2].slice(1));
+      this.setState({ productTopic: topic });
+      this.getDataset(topic);
+    } else {
+      this.setState({ productTopic: '' });
+      this.setState({ datasets: [] });
+    }
   }
 
   render() {
@@ -67,17 +72,15 @@ class App extends Component {
         <div className="h-100">
           <Switch>
             <Route exact path="/" render={props => <Dashboard
-              handleTopicInputChange={this.handleTopicInputChange}
-              handleTopicInputButtonClick={this.handleTopicInputButtonClick}
               datasets={this.state.datasets}
               topic={this.state.productTopic}
-              isLoading={this.state.isLoading}/>} />
+              isLoading={this.state.isLoading}
+              history={this.props.history}/>} />
             <Route path="/product/:topic" render={props => <Dashboard
-              handleTopicInputChange={this.handleTopicInputChange}
-              handleTopicInputButtonClick={this.handleTopicInputButtonClick}
               datasets={this.state.datasets}
               topic={this.state.productTopic}
-              isLoading={this.state.isLoading}/>} />
+              isLoading={this.state.isLoading}
+              history={this.props.history}/>} />
             <Route component={NotFound} />
           </Switch>
         </div>
@@ -86,4 +89,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

@@ -5,7 +5,7 @@ const { getProductTopic, getProductTopics } = require('./db');
 const { output } = require('../../config.js');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080; // for heroku
 
 app.use(cors());
 

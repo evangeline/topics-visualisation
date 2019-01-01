@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import matchSorter from 'match-sorter';
 
-const TopicDropdownItem = ({ handleTopicInputButtonClick, topic, history }) => {
+const TopicDropdownItem = ({ topic, history }) => {
   const buttonClicked = e => {
     e.preventDefault();
     history.push(`/product/${topic}`);
-    handleTopicInputButtonClick(topic);
   };
   return (
     <button
@@ -17,8 +15,6 @@ const TopicDropdownItem = ({ handleTopicInputButtonClick, topic, history }) => {
     </button>
   );
 };
-
-const TopicDropdownItemWithRouter = withRouter(TopicDropdownItem);
 
 const TopicInput = ({ handleTopicInputChange }) => {
   const inputChanged = e => {
@@ -38,11 +34,11 @@ const TopicInput = ({ handleTopicInputChange }) => {
   );
 };
 
-const TopicDropdownMenu = ({ handleTopicInputChange, handleTopicInputButtonClick, filteredTopics }) => {
-  const TopicDropdownItems = filteredTopics.map(topic => <TopicDropdownItemWithRouter
+const TopicDropdownMenu = ({ handleTopicInputChange, filteredTopics, history }) => {
+  const TopicDropdownItems = filteredTopics.map(topic => <TopicDropdownItem
     key={`dropdown-${topic.replace(/\s/g, '')}`}
     topic={topic}
-    handleTopicInputButtonClick={handleTopicInputButtonClick}/>);
+    history={history}/>);
   return (
     <div
       className="dropdown-menu pre-scrollable mx-auto"
@@ -111,8 +107,8 @@ class TopicDropdown extends Component {
         </button>
         <TopicDropdownMenu
           handleTopicInputChange={this.handleTopicInputChange}
-          handleTopicInputButtonClick={this.props.handleTopicInputButtonClick}
-          filteredTopics={this.state.filteredTopics}/>
+          filteredTopics={this.state.filteredTopics}
+          history={this.props.history}/>
       </div>
     );
   }

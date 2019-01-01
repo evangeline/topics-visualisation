@@ -57,6 +57,27 @@ const graphSetup = [
 
 const datasetOptions = ({ audienceTopic, audienceSize, combinedSize, productInterest }) => {
   const n = String(Math.ceil(productInterest / 10)).charAt(0);
+  if (n === '0') {
+    const { r, rgb, text } = graphSetup[n];
+    return (
+      {
+        label: text,
+        data: [
+          {
+            x: audienceSize,
+            y: combinedSize,
+            r,
+          }
+        ],
+        backgroundColor: `rgb(${rgb},0.2)`,
+        borderColor: `rgb(${rgb},1)`,
+        borderWidth: 1,
+        hoverBackgroundColor: 'rgb(0, 0, 0, 0)',
+        hoverBorderWidth: 5,
+        productInterest,
+        audienceTopic
+      });
+  }
   const { r, rgb, text } = graphSetup[n - 1];
   return (
     {
@@ -75,7 +96,7 @@ const datasetOptions = ({ audienceTopic, audienceSize, combinedSize, productInte
       hoverBorderWidth: 5,
       productInterest,
       audienceTopic
-    });
+    })
 };
 
 const tooltipOptions = (tooltipItem, data) => {

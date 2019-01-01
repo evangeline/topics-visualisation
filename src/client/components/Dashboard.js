@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
 import Table from './ResultsTable';
 import Graph from './ResultsChart';
 import TopicDropdown from './TopicDropdown';
@@ -12,16 +11,24 @@ const Spinner = () => (
   </div>
 );
 
-const DashboardNavbar = ({ handleTopicInputButtonClick, topic }) => (
-  <nav className="navbar d-flex sticky-top navbar-light bg-white shadow-sm">
-    <Link className="navbar-brand" to="/">
-      <i className="fas fa-pencil-alt text-dark"/>
-    </Link>
-    <TopicDropdown
-      handleTopicInputButtonClick={handleTopicInputButtonClick}
-      topic={topic}/>
-  </nav>
-);
+const DashboardNavbar = ({ topic, history }) => {
+  const navClicked = e => {
+    e.preventDefault();
+    history.push('/');
+  };
+  return (
+    <nav className="navbar d-flex sticky-top navbar-light bg-white shadow-sm">
+      <span
+        className="navbar-brand"
+        onClick={navClicked}>
+        <i className="fas fa-pencil-alt text-dark"/>
+      </span>
+      <TopicDropdown
+        topic={topic}
+        history={history}/>
+    </nav>
+  );
+}
 
 const Results = ({ datasets, isLoading }) => {
   if (!isLoading) {
@@ -51,17 +58,15 @@ const Results = ({ datasets, isLoading }) => {
   );
 };
 
-const Dashboard = ({ handleTopicInputButtonClick, datasets, topic, isLoading }) => (
-  <Router>
-    <div className="container-fluid d-flex flex-column bg-light p-0 h-100">
-      <DashboardNavbar
-        handleTopicInputButtonClick={handleTopicInputButtonClick}
-        topic={topic}/>
-      <Results
-        datasets={datasets}
-        isLoading={isLoading}/>
-    </div>
-  </Router>
+const Dashboard = ({ datasets, topic, isLoading, history }) => (
+  <div className="container-fluid d-flex flex-column bg-light p-0 h-100">
+    <DashboardNavbar
+      topic={topic}
+      history={history}/>
+    <Results
+      datasets={datasets}
+      isLoading={isLoading}/>
+  </div>
 );
 
 export default Dashboard;
