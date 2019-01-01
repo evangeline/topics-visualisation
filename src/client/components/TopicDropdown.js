@@ -5,7 +5,7 @@ import matchSorter from 'match-sorter';
 const TopicDropdownItem = ({ handleTopicInputButtonClick, topic, history }) => {
   const buttonClicked = e => {
     e.preventDefault();
-    history.push(`/product/${topic.toLowerCase()}`);
+    history.push(`/product/${topic}`);
     handleTopicInputButtonClick(topic);
   };
   return (

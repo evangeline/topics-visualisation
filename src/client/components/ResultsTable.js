@@ -21,7 +21,7 @@ const Table = ({ datasets }) => {
     ),
     filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ['audienceTopic'] }),
     filterAll: true,
-    minWidth: 200
+    minWidth: 150
   }, {
     Header: 'Audience Size (\'000s)',
     accessor: 'audienceSize',
