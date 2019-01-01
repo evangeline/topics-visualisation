@@ -28,7 +28,7 @@ const DashboardNavbar = ({ topic, history }) => {
         history={history}/>
     </nav>
   );
-}
+};
 
 const Results = ({ datasets, isLoading }) => {
   if (!isLoading) {
