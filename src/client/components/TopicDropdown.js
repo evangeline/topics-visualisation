@@ -70,7 +70,7 @@ class TopicDropdown extends Component {
 
   getTopics() {
     // polyfill
-    fetch('http://localhost:8080/api/topics', {
+    fetch('/api/topics', {
       method: 'GET',
     })
       .then(res => {
@@ -107,7 +107,7 @@ class TopicDropdown extends Component {
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false">
-          {`Product Topic: ${this.props.topic}` || 'Select a Product Topic'}
+          {this.props.topic ? `Product Topic: ${this.props.topic}` : 'Select a Product Topic'}
         </button>
         <TopicDropdownMenu
           handleTopicInputChange={this.handleTopicInputChange}

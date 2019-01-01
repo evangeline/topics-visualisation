@@ -36,7 +36,7 @@ class App extends Component {
   getDataset(topic) {
     this.setState({ isLoading: true });
     // polyfill
-    fetch(`http://localhost:8080/api/product/${topic}`, {
+    fetch(`/api/product/${topic}`, {
       method: 'GET',
     })
       .then(res => {
