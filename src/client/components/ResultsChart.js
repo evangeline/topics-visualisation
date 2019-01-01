@@ -57,15 +57,15 @@ const graphSetup = [
 
 const datasetOptions = ({ audienceTopic, audienceSize, combinedSize, productInterest }) => {
   const n = String(Math.ceil(productInterest / 10)).charAt(0);
-  const { r, rgb } = graphSetup[n - 1];
+  const { r, rgb, text } = graphSetup[n - 1];
   return (
     {
-      label: audienceTopic,
+      label: text,
       data: [
         {
           x: audienceSize,
           y: combinedSize,
-          r: r,
+          r,
         }
       ],
       backgroundColor: `rgb(${rgb},0.2)`,
@@ -74,14 +74,15 @@ const datasetOptions = ({ audienceTopic, audienceSize, combinedSize, productInte
       hoverBackgroundColor: 'rgb(0, 0, 0, 0)',
       hoverBorderWidth: 5,
       productInterest,
+      audienceTopic
     });
 };
 
 const tooltipOptions = (tooltipItem, data) => {
-  const { label, productInterest } = data.datasets[tooltipItem.datasetIndex];
+  const { audienceTopic, productInterest } = data.datasets[tooltipItem.datasetIndex];
   const audienceSize = tooltipItem.xLabel;
   const combinedSize = tooltipItem.yLabel;
-  return `${label}: Audience Size = ${audienceSize}K, Combined Size = ${combinedSize}K, Product Interest = ${productInterest}%`;
+  return `${audienceTopic}: Audience Size = ${audienceSize}K, Combined Size = ${combinedSize}K, Product Interest = ${productInterest}%`;
 };
 
 const generateLabelOptions = ({ text, rgb }) => {
@@ -90,12 +91,6 @@ const generateLabelOptions = ({ text, rgb }) => {
       text,
       fillStyle: `rgb(${rgb},1)`
     }
-  );
-};
-
-const filterOptions = (legendItem, data) => {
-  return (
-    true
   );
 };
 
@@ -139,7 +134,6 @@ const Graph = ({ datasets }) => {
     legend: {
       labels: {
         generateLabels: chart => graphSetup.map(generateLabelOptions),
-        filter: filterOptions
       }
     },
     tooltips: {

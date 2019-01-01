@@ -1,8 +1,12 @@
 const { Pool } = require('pg');
-const { user, host, database, password } = require('./config');
 
 const pool = new Pool({
-  user, host, database, password, port: 5432, ssl: true
+  user: process.env.USER,
+  host: process.env.HOST,
+  database: process.env.DATABASE,
+  password: process.env.PASSWORD,
+  port: 5432,
+  ssl: true
 });
 
 const rowToDataset = ({ topic2, topic2_size, combined_size }) => {

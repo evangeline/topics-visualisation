@@ -5,4 +5,3 @@ dist
 yarn.lock
 .idea/
 package-lock.json
-/src/server/config.js
