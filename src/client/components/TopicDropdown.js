@@ -43,7 +43,6 @@ const TopicDropdownMenu = ({ handleTopicInputChange, handleTopicInputButtonClick
     key={`dropdown-${topic.replace(/\s/g, '')}`}
     topic={topic}
     handleTopicInputButtonClick={handleTopicInputButtonClick}/>);
-  console.log(TopicDropdownItems);
   return (
     <div
       className="dropdown-menu pre-scrollable mx-auto"
@@ -108,7 +107,7 @@ class TopicDropdown extends Component {
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false">
-          {this.props.topic || 'Select a Product Topic'}
+          {`Product Topic: ${this.props.topic}` || 'Select a Product Topic'}
         </button>
         <TopicDropdownMenu
           handleTopicInputChange={this.handleTopicInputChange}

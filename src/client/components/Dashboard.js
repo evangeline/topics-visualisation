@@ -5,7 +5,7 @@ import Graph from './ResultsChart';
 import TopicDropdown from './TopicDropdown';
 
 const Spinner = () => (
-  <div className="row text-center h-100">
+  <div className="row text-center w-100 h-100">
     <div className="col my-auto">
       <i className="fas fa-circle-notch fa-3x fa-spin text-dark"/>
     </div>
@@ -29,11 +29,11 @@ const Results = ({ datasets, isLoading }) => {
       <div className="row w-100 m-0">
         <div className="col-xl-11 mx-auto mt-5">
           <div className="row">
-            <div className="col-lg-6">
+            <div className="col-lg-4">
               <Table
                 datasets={datasets}/>
             </div>
-            <div className="col-lg-6">
+            <div className="col-lg-8">
               <div className="card my-3 border-0 shadow">
                 <div className="card-body">
                   <Graph

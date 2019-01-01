@@ -8,19 +8,30 @@ const Table = ({ datasets }) => {
   const columns = [{
     Header: 'Audience Topic',
     accessor: 'audienceTopic',
+    Filter: ({filter, onChange}) => (
+      <input
+        type="text"
+        placeholder="Filter Topic..."
+        value={filter ? filter.value : ''}
+        onChange={e => {
+          e.preventDefault();
+          onChange(e.target.value);
+        }}
+      />
+    ),
     filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ['audienceTopic'] }),
     filterAll: true,
     minWidth: 200
   }, {
-    Header: 'Audience Size',
+    Header: 'Audience Size (\'000s)',
     accessor: 'audienceSize',
     filterable: false,
   }, {
-    Header: 'Combined Size',
+    Header: 'Combined Size (\'000s)',
     accessor: 'combinedSize',
     filterable: false,
   }, {
-    Header: 'Product Interest',
+    Header: 'Product Interest (%)',
     accessor: 'productInterest',
     filterable: false,
   }];
