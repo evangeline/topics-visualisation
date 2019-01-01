@@ -1,10 +1,11 @@
 const { Pool } = require('pg');
+const { user, host, database, password } = require('../../config.js');
 
 const pool = new Pool({
-  user: process.env.USER,
-  host: process.env.HOST,
-  database: process.env.DATABASE,
-  password: process.env.PASSWORD,
+  user,
+  host,
+  database,
+  password,
   port: 5432,
   ssl: true
 });

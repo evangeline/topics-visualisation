@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const { getProductTopic, getProductTopics } = require('./db');
+const { output } = require('../../config.js');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -11,7 +12,7 @@ app.use(cors());
 app.get('/api/product/:topic', getProductTopic);
 app.get('/api/topics', getProductTopics);
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', '..', 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', '..', output, 'index.html'));
 });
 app.use((error, req, res, next) => {
   console.error(error.stack);

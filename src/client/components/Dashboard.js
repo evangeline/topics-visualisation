@@ -15,7 +15,7 @@ const Spinner = () => (
 const DashboardNavbar = ({ handleTopicInputButtonClick, topic }) => (
   <nav className="navbar d-flex sticky-top navbar-light bg-white shadow-sm">
     <Link className="navbar-brand" to="/">
-      <img src="../../public/pencil.png" alt="logo" style={{ maxHeight: '30px' }}/>
+      <i className="fas fa-pencil-alt text-dark"/>
     </Link>
     <TopicDropdown
       handleTopicInputButtonClick={handleTopicInputButtonClick}
