@@ -91,3 +91,7 @@ All the source code will be inside **src** directory. Inside src, there is clien
 
     - If any requests fails, it currently sends back a 400 or 500 with whatever error that's been caught in a single try catch. 
     I would break the try catches down further, send user-readable error messages and build a component that renders the error message.
+
+4. Mobile optimisation
+    
+    - Displaying tables and charts in an user-friendly manner for mobiles is hard. Everything's responsive, but some features like zoom have not been translated to mobile yet.
