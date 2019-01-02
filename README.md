@@ -12,11 +12,13 @@ Specifically the requirements are:
 - No preference on how/where data is stored
 - No need to worry about adding new topics & data refresh
 
-### Development mode
+You can find more details in brief.pdf
+
+### Development mode (Recommended)
 
 In the development mode, we will have 2 servers running. The front end code will be served by the [webpack dev server](https://webpack.js.org/configuration/dev-server/) which helps with hot and live reloading. The server side Express code will be served by a node server using [nodemon](https://nodemon.io/) which helps in automatically restarting the server whenever server side code changes.
 
-### Production mode
+### Production mode (Still buggy!)
 
 In the production mode, we will have only 1 server running. All the client side code will be bundled into static files using webpack and it will be served by the Node.js/Express application.
 
