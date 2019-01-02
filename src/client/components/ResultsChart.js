@@ -107,14 +107,12 @@ const tooltipOptions = (tooltipItem, data) => {
   return `${audienceTopic}: Audience Size = ${audienceSize}K, Combined Size = ${combinedSize}K, Product Interest = ${productInterest}%`;
 };
 
-const generateLabelOptions = ({ text, rgb }) => {
-  return (
-    {
-      text,
-      fillStyle: `rgb(${rgb},1)`
-    }
-  );
-};
+const generateLabelOptions = ({ text, rgb }) => (
+  {
+    text,
+    fillStyle: `rgb(${rgb},1)`
+  }
+);
 
 const Graph = ({ datasets }) => {
   const data = { datasets: datasets.map(datasetOptions) };
