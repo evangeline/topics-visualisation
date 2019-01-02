@@ -56,7 +56,8 @@ const graphSetup = [
 ];
 
 const datasetOptions = ({ audienceTopic, audienceSize, combinedSize, productInterest }) => {
-  const n = String(Math.ceil(productInterest / 10)).charAt(0);
+  const n = String(Math.ceil(productInterest / 10)).split('.')[0];
+  console.log(n);
   if (n === '0') {
     const { r, rgb, text } = graphSetup[n];
     return (
@@ -96,7 +97,7 @@ const datasetOptions = ({ audienceTopic, audienceSize, combinedSize, productInte
       hoverBorderWidth: 5,
       productInterest,
       audienceTopic
-    })
+    });
 };
 
 const tooltipOptions = (tooltipItem, data) => {
