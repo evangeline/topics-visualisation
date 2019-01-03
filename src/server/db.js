@@ -24,7 +24,7 @@ const rowToDataset = ({ topic2, topic2_size, combined_size }) => {
 
 const getProductTopic = async (req, res, next) => {
   try {
-    const { rows } = await pool.query(`SELECT * FROM topic_sizes WHERE UPPER(topic1) = UPPER('${req.params.topic}')`);
+    const { rows } = await pool.query('SELECT * FROM topic_sizes WHERE UPPER(topic1) = UPPER($1)', [req.params.topic]);
     const datasets = rows.map(rowToDataset);
     res.status(200).send({ datasets });
   } catch (error) {
