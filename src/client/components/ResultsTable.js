@@ -40,7 +40,7 @@ const Table = ({ datasets }) => {
     <ReactTable
       data={datasets}
       columns={columns}
-      className="-striped -highlight bg-white my-3 border-0 shadow"
+      className="-striped -highlight bg-white border-0 shadow"
       filterable
       defaultSorted={[
         {

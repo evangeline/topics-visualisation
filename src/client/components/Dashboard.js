@@ -4,8 +4,8 @@ import Graph from './ResultsChart';
 import TopicDropdown from './TopicDropdown';
 
 const Spinner = () => (
-  <div className="row text-center w-100 h-100">
-    <div className="col my-auto">
+  <div className="row text-center w-100">
+    <div className="col m-5">
       <i className="fas fa-circle-notch fa-3x fa-spin text-dark"/>
     </div>
   </div>
@@ -34,19 +34,21 @@ const Results = ({ datasets, isLoading }) => {
   if (!isLoading) {
     return (
       <div className="row w-100 m-0">
-        <div className="col-xl-11 mx-auto mt-5">
+        <div className="col-xl-8 mx-auto">
           <div className="row">
-            <div className="col-lg-4">
-              <Table
-                datasets={datasets}/>
-            </div>
-            <div className="col-lg-8">
-              <div className="card my-3 border-0 shadow">
+            <div className="col mt-3">
+              <div className="card border-0 shadow">
                 <div className="card-body">
                   <Graph
                     datasets={datasets}/>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col my-3">
+              <Table
+                datasets={datasets}/>
             </div>
           </div>
         </div>
@@ -59,7 +61,7 @@ const Results = ({ datasets, isLoading }) => {
 };
 
 const Dashboard = ({ datasets, topic, isLoading, history }) => (
-  <div className="container-fluid d-flex flex-column bg-light p-0 h-100">
+  <div className="container-fluid d-flex flex-column bg-light p-0" style={{ minHeight: '100%' }}>
     <DashboardNavbar
       topic={topic}
       history={history}/>
